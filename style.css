@@ -1,0 +1,253 @@
+body{
+    min-height:100%;
+    background-image: linear-gradient(-225deg, #473B7B 0%, #3584A7 51%, #30D2BE 100%);
+    }
+    
+    #timerbackground{
+        background-color: #373d44;
+          transform: translate(-50%, -50%);
+      position: absolute;
+      top: 50%;
+      left: 50%;
+        
+        
+      padding: 0% .5% .5% .5%; 
+        box-shadow: 10px 10px 20px #034eaa; 
+        text-align:center;
+        border-color: #131616;
+        border-style: solid;
+        border-width: 4px;
+    }
+    #clock_title{
+        
+        line-height: 45px;
+        font-size: 45px;
+      color: #cddff4;
+     font-family: 'Playfair Display', serif;
+     margin: 2% auto;
+     text-shadow: 2px 2px 3px black;
+    
+    }
+    h1{
+        margin: 0% auto;	
+        font-size: 30px;
+      color: #cddff4;
+     font-family: 'Playfair Display', serif;
+    }
+    
+    hr{
+         background-color: #131616; height: 1px; border: 0;
+         margin: 3% auto;
+    }
+    #break_buttons_div{
+        width: 100%;
+        margin: 2% auto;
+    }
+    #plus_buttons_div{
+        width: 100%;
+        margin: 2% auto;
+    }
+    #minus_session{
+        min-width: 10%;
+        font-size: 150%;
+        line-height: 80%;
+        text-align: center;
+        left: 50%;
+        background-color: #cddff4;
+    }	
+    #plus_session{
+        min-width: 10%;
+        left:55%;
+        text-align: center;
+        font-size: 150%;
+        line-height:80%;
+        
+        background-color: #cddff4;
+    }
+    #minus_break{
+        min-width: 10%;
+        font-size: 150%;
+        line-height: 80%;
+        text-align: center;
+        left: 50%;
+        background-color: #cddff4;
+    }	
+    #plus_break{
+        min-width: 10%;
+        left:55%;
+        text-align: center;
+        font-size: 150%;
+        line-height:80%;
+        
+        background-color: #cddff4;
+    }
+    .break{
+        margin: 0% auto;
+        font-size: 20px;
+        font-family: 'Oswald', serif;
+        
+    color: #22d1e5;
+    }
+    .showGreenBreak{
+        font-size: 20px;
+        font-family: 'Oswald', serif;
+        
+         background: -webkit-linear-gradient(#19ef0e, #96f990);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .showRedBreak{
+        font-size: 20px;
+        font-family: 'Oswald', serif;
+        
+         color: #f41a1a;
+    }
+    
+    .session{
+        margin: 0% auto;
+        font-size: 20px;
+        font-family:'Oswald', serif;
+        color: #22d1e5;
+         
+    }
+    .showGreenSession{
+        font-size: 20px;
+        font-family: 'Oswald', serif;
+        
+         background: -webkit-linear-gradient(#19ef0e, #96f990);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .showRedSession{
+        font-size: 20px;
+        font-family: 'Oswald', serif;
+        
+         color: #f41a1a;
+    }
+    
+    #pause_button{
+    margin: 1% auto;
+    padding: 0% 2% 0% 2%;
+    }
+    #pause_background{
+    background-color:  #cddff4;
+    }
+    #playbutton{
+    background-color:  #cddff4;	
+    }
+    #timer{
+        
+        font-size: 5em;	
+    
+        font-family: 'Inconsolata', monospace;
+          background: -webkit-linear-gradient(#07448e, #2bffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+     margin: 0% auto;
+    }
+    #reset_button_div{
+        width: 100%;
+        line-height: 80%;
+    }
+    #reset_button{
+        display: block;
+        text-align: center;
+        min-width: 18%;
+        height: 4%;
+        color: black;
+        background-color: #cddff4;
+        font-family:'Oswald', serif;
+        font-size: 100%;
+        line-height: 5%;
+        padding: 4%;
+        margin: 2% auto 0 auto;	
+        
+    }
+    
+    .tomato_pic1{
+        margin:2% auto;
+        border-radius: 15px;
+        width: 5px;
+        height: 5px;
+        
+    }
+    .tomato_pic11{
+        margin:2% auto;
+        border-radius: 15px;
+        width: 30px;
+        height: 30px;
+        animation-name: tomato;
+        animation-duration: 2s;
+    }
+    .tomato_pic3{
+        margin:2% auto;
+        border-radius: 15px;
+        width: 5px;
+        height: 5px;
+    }
+    .tomato_pic33{
+        margin:2% auto;
+        border-radius: 15px;
+        width: 30px;
+        height: 30px;
+        animation-name: tomato;
+        animation-duration: 2s;
+    }
+    .tomato_pic5{
+        margin:2% auto;
+        border-radius: 15px;
+        width: 5px;
+        height: 5px;
+    }
+    .tomato_pic55{
+        margin:2% auto;
+        border-radius: 15px;
+        width: 30px;
+        height: 30px;
+        animation-name: tomato;
+        animation-duration: 2s;
+    }
+    .tomato_pic7{
+        margin:2% auto;
+        border-radius: 15px;
+        width: 5px;
+        height: 5px;
+    }
+    .tomato_pic77{
+        margin:2% auto;
+        border-radius: 15px;
+        width: 30px;
+        height: 30px;
+        animation-name: tomato;
+        animation-duration: 2s;
+    }
+    @keyframes tomato {
+        0% {width: 5px; height: 5px}
+        50% {width: 60px; height: 60px}
+            100% {width: 30px; height: 30px}
+    }
+    
+    #footer{	  
+    position:absolute;
+       bottom:0;
+       width:100%;
+       height:5%;
+    text-align: center; 
+     
+    }
+    h6{
+        color: black;
+        font-size: 80%;
+    }
+    #help_button{
+        position: absolute;
+        font-size: 110%;
+        text-shadow: 2px 2px 3px black;
+        text-align: left;
+        color: #cddff4;
+        background: transparent;
+        border: none;
+       left: 10px;
+       bottom:0;
+    }
+    

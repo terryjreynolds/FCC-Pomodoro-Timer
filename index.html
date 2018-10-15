@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+<html>
+
+<head>
+    <title>Pomodoro Timer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Pomodoro Timer built by Terry Reynolds">
+    <meta name="keywords" content="Developer, Canada, Teacher, FreeCodeCamp, Terry Reynolds">
+    <meta name="author" content="Terry Reynolds">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Oswald|Oxygen|Playfair+Display|Raleway|Roboto+Mono"
+        rel="stylesheet">
+</head>
+
+<body id="body">
+    <!--Big shout out to Dave Ross for the free bell sound effect. Thanks a million. Also, to nebo.edu for the buzzer-->
+    <audio id="chime" src="http://www.daveross.com/audio/BELL SOUND LEGISLATURE.wav"></audio>
+    <audio id="buzzer" src="http://www.nebo.edu/learning_resources/ppt/sounds/buzzer.wav"></audio>
+
+
+    <div id="timerbackground">
+        <p id="clock_title">Pomodoro Timer
+        </p>
+        <hr>
+        <h2 class="session" id="pomodorosession">WORK</h2>
+        <h1 id="session_number">25 min</h1>
+        <div id="break_buttons_div"><button type="button" id="minus_session" class="buttons">-</button>
+            <button type="button" id="plus_session" class="buttons">+</button></div>
+
+        <hr>
+
+        <h2 class="break" id="pomodorobreak">BREAK</h2>
+        <h1 id="break_number">5 min</h1>
+
+        <div id="plus_buttons_div"><button type="button" id="minus_break" class="buttons">-</button>
+
+            <button type="button" id="plus_break" class="buttons">+</button></div>
+
+        <hr>
+        <button type="button" id="playbutton"><i class="fa fa-play" id="play_button" aria-hidden="true"></i></button>
+        <button type="button" id="pause_background"><i class="fa fa-pause" id="pause_button" aria-hidden="true"></i></button>
+        <div id="reset_button_div"><button type="button" id="reset_button">RESET</button></div>
+
+        <div id="timer">
+            00:00
+        </div>
+
+
+        <button id="help_button"><i class="fa fa-question" aria-hidden="true"></i></button>
+
+        <img src="https://lh3.googleusercontent.com/tbU9UxpTqqHwgvbHIom0hU6s0vfFtipMhy3RLuHl34TWtKmisIOBYCatKSah9k_AhmcNywEnGRBhRVfOyrR1HMJSK_U7PND6YCFS39lDpE5oX6bQ1dtAB0tzM02pu03sOQm33YUVIQ"
+            border="0" alt="a tomato" id="tomato_pic1" class="tomato_pic1">
+        <img src="https://lh3.googleusercontent.com/tbU9UxpTqqHwgvbHIom0hU6s0vfFtipMhy3RLuHl34TWtKmisIOBYCatKSah9k_AhmcNywEnGRBhRVfOyrR1HMJSK_U7PND6YCFS39lDpE5oX6bQ1dtAB0tzM02pu03sOQm33YUVIQ"
+            border="0" alt="a tomato" id="tomato_pic3" class="tomato_pic3">
+        <img src="https://lh3.googleusercontent.com/tbU9UxpTqqHwgvbHIom0hU6s0vfFtipMhy3RLuHl34TWtKmisIOBYCatKSah9k_AhmcNywEnGRBhRVfOyrR1HMJSK_U7PND6YCFS39lDpE5oX6bQ1dtAB0tzM02pu03sOQm33YUVIQ"
+            border="0" alt="a tomato" id="tomato_pic5" class="tomato_pic5">
+        <img src="https://lh3.googleusercontent.com/tbU9UxpTqqHwgvbHIom0hU6s0vfFtipMhy3RLuHl34TWtKmisIOBYCatKSah9k_AhmcNywEnGRBhRVfOyrR1HMJSK_U7PND6YCFS39lDpE5oX6bQ1dtAB0tzM02pu03sOQm33YUVIQ"
+            border="0" alt="a tomato" id="tomato_pic7" class="tomato_pic7">
+
+
+
+    </div>
+
+
+    <script type="text/javascript">
+        var changeBreakColor = document.getElementById("pomodorobreak");
+        var changeSessionColor = document.getElementById("pomodorosession");
+        var breakDuration = 5;
+        var sessionDuration = 25;
+        var pause_OnorOFF = "off";
+        var playButtonState = "notpressedyet";
+
+        //function to control the plus and minus buttons for Break duration
+        function increaseBreakDuration() {
+
+            if (breakDuration < 30) {
+                breakDuration = breakDuration + 1;
+                $("#break_number").text(breakDuration + " " + "min");
+            } else {
+                $("#break_number").text(breakDuration + " " + "min");
+            }
+        }
+        //decrease break button
+        function decreaseBreakDuration() {
+            if (breakDuration > 1) {
+                breakDuration = breakDuration - 1;
+                $("#break_number").text(breakDuration + " " + "min");
+            } else {
+                $("#break_number").text(breakDuration + " " + "min");
+            }
+        }
+
+        var plusBreak = document.getElementById("plus_break");
+        var minusBreak = document.getElementById("minus_break");
+
+        plusBreak.onclick = function () {
+            increaseBreakDuration();
+        }
+        minusBreak.onclick = function () {
+            decreaseBreakDuration();
+        }
+
+        //function to control plus and minus buttons for Work duration
+        function increaseSessionDuration() {
+            if (sessionDuration < 60) {
+                sessionDuration = sessionDuration + 1;
+                $("#session_number").text(sessionDuration + " " + "min");
+            } else {
+                $("#session_number").text(sessionDuration + " " + "min");
+            }
+        }
+        //decrease session duration
+        function decreaseSessionDuration() {
+            if (sessionDuration > 1) {
+                sessionDuration = sessionDuration - 1;
+                $("#session_number").text(sessionDuration + " " + "min");
+            } else {
+                $("#session_number").text(sessionDuration + " " + "min");
+            }
+        }
+
+        var plusSession = document.getElementById("plus_session");
+        var minusSession = document.getElementById("minus_session");
+
+        plusSession.onclick = function () {
+            increaseSessionDuration();
+        }
+        minusSession.onclick = function () {
+            decreaseSessionDuration();
+        }
+
+        var resetButton = document.getElementById("reset_button");
+
+        resetButton.onclick = function () {
+            fullReset();
+        }
+
+        function fullReset() {
+
+            playButtonState = "notpressedyet";
+            pause_OnorOFF = "off";
+            $("#pause_button").css("color", "");
+            breakDuration = 5;
+            sessionDuration = 25;
+            var breakNumber = document.getElementById("break_number");
+            var sessionNumber = document.getElementById("session_number");
+            breakNumber.innerHTML = ("5 min");
+            sessionNumber.innerHTML = ("25 min");
+            var timer = document.getElementById("timer");
+            timer.innerHTML = ("00:00");
+
+            function resetTomatoes() {
+                var pic1 = document.getElementById("tomato_pic1");
+                var pic3 = document.getElementById("tomato_pic3");
+                var pic5 = document.getElementById("tomato_pic5");
+                var pic7 = document.getElementById("tomato_pic7");
+                pic1.classList.remove("tomato_pic11");
+                pic3.classList.remove("tomato_pic33");
+                pic5.classList.remove("tomato_pic55");
+                pic7.classList.remove("tomato_pic77");
+                pomodoroCounter = 0;
+            }
+            //function to alternate between greening of Work or Break text
+            function removeGreen() {
+                changeBreakColor.classList.remove("showGreenBreak");
+                changeSessionColor.classList.remove("showGreenSession");
+            }
+            //functon to add red highlight during pause
+            function removeRed() {
+                changeBreakColor.classList.remove("showRedBreak");
+                changeSessionColor.classList.remove("showRedSession");
+            }
+
+            removeGreen();
+            removeRed();
+            resetTomatoes();
+            myStopFunction();
+        }
+
+        function myStopFunction() {
+            clearTimeout(timeoutHandle);
+        }
+
+        var pomodoroCounter = 0;
+        var sessionTime = "no";
+        var minutesNow;
+        var secondsNow;
+        var current_minutes;
+        var seconds = 60;
+        var mins;
+        var timeoutHandle;
+
+        //function to make the timer work. Many thanks to http://navaneeth.me for help with the basic timer 
+        function countdown(minutes, secondsgiven) {
+            seconds = secondsgiven;
+            mins = minutes;
+
+
+            function tick() {
+                var counter = document.getElementById("timer");
+                current_minutes = mins - 1
+                seconds--;
+
+
+                counter.innerHTML =
+                    current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+                if (seconds > 0) {
+                    timeoutHandle = setTimeout(tick, 1000);
+
+                } else if (current_minutes >= 1) {
+
+                    // countdown(mins-1);   never reach “00″ issue solved:Contributed by Victor Streithorst
+                    setTimeout(function () { countdown(mins - 1, 60); }, 1000);
+
+                } else {
+
+                    pomodoroCounter = pomodoroCounter + 1;
+
+                    if (sessionTime == "no") {
+
+                        countPomodoros(pomodoroCounter);
+
+                        function countPomodoros(number) {
+                            if (pomodoroCounter == 1 || pomodoroCounter == 3 || pomodoroCounter == 5 || pomodoroCounter == 7) {
+                                toggleDurationClasses();
+                                tomatoPick(pomodoroCounter);
+                            } else if (pomodoroCounter = 8) {
+                                buzzer.play();
+                                fullReset();
+                            }
+                            //function decides when to puff up a tomato
+                            function tomatoPick(tomatoNumber) {
+
+
+                                var tomatoToGrow = "tomato_pic" + tomatoNumber;
+                                var tomatoToggle = "tomato_pic" + tomatoNumber + tomatoNumber;
+                                var element = document.getElementById(tomatoToGrow);
+                                element.classList.toggle(tomatoToggle);
+                                sessionTime = "yes"
+                                if (pomodoroCounter == 7) {
+                                    sessionTime = "no";
+                                    var text = "0" + ":" + "00";
+                                    $("#timer").text(text);
+
+                                    setTimeout(function () { lastOne(); }, 1000);
+                                    function lastOne() {
+                                        breakDuration = 30;
+                                        var text = breakDuration.toString() + ":" + "00";
+                                        $("#timer").text(text);
+                                        setTimeout(function () { countdown(breakDuration, 60); }, 1000);
+
+                                    }
+                                } else {
+                                    setTimeout(function () { oddOne(); }, 1000);
+                                    function oddOne() {
+
+                                        var text = breakDuration.toString() + ":" + "00";
+                                        $("#timer").text(text);
+                                        setTimeout(function () { countdown(breakDuration, 60); }, 1000);
+                                    }
+
+
+                                }
+                            }
+                        }
+
+                        //condition for 2,4,6
+                    } else {
+                        toggleDurationClasses();
+                        sessionTime = "no"
+                        setTimeout(function () { evenOne(); }, 1000);
+                        function evenOne() {
+
+                            var text = sessionDuration.toString() + ":" + "00";
+                            $("#timer").text(text);
+                            setTimeout(function () { countdown(sessionDuration, 60); }, 1000);
+                        }
+
+                    }
+
+
+                }
+
+            }
+            tick();
+        }
+
+
+
+        //time interval function
+        var playbutton = document.getElementById("playbutton");
+
+        playbutton.onclick = function () {
+            //error handling
+            if (playButtonState == "alreadypressed") {
+                alert("You've already pressed play. Press reset if you wish to start over.");
+            } else {
+                playButtonState = "alreadypressed";
+                changeSessionColor.classList.toggle("showGreenSession");
+
+                var text = sessionDuration.toString() + ":" + "00";
+                $("#timer").text(text);
+                setTimeout(function () { countdown(sessionDuration, 60); }, 1000);
+
+            }
+        }
+        function toggleDurationClasses() {
+
+            changeSessionColor.classList.toggle("showGreenSession");
+            changeBreakColor.classList.toggle("showGreenBreak");
+            chime.play();
+        }
+        var pauseButton = document.getElementById("pause_button");
+
+        pauseButton.onclick = function () {
+            pause();
+
+        }
+        function redOnPause() {
+            var greenOrNot = pomodorosession.classList.contains("showGreenSession");
+
+            if (greenOrNot == true) {
+
+                changeSessionColor.classList.toggle("showGreenSession");
+                changeSessionColor.classList.toggle("showRedSession");
+            } else {
+                changeBreakColor.classList.toggle("showGreenBreak");
+                changeBreakColor.classList.toggle("showRedBreak");
+            }
+        }
+
+        function redOffPause() {
+            var redOrNot = pomodorosession.classList.contains("showRedSession");
+
+            if (redOrNot == true) {
+                changeSessionColor.classList.toggle("showRedSession");
+                changeSessionColor.classList.toggle("showGreenSession");
+            } else {
+                changeBreakColor.classList.toggle("showRedBreak");
+                changeBreakColor.classList.toggle("showGreenBreak");
+            }
+        }
+        //pause takes a snapshot of minutes and seconds, then resets the timer from that position
+        function pause() {
+            if (pause_OnorOFF == "off" && playButtonState == "alreadypressed") {
+                pause_OnorOFF = "on";
+                $("#pause_button").css("color", "#f41a1a");
+                redOnPause();
+                minutesNow = current_minutes + 1;
+
+
+                secondsNow = seconds;
+
+                myStopFunction();
+
+            } else if (pause_OnorOFF == "on") {
+                pause_OnorOFF = "off";
+                myStopFunction();
+                $("#pause_button").css("color", "");
+                redOffPause();
+                countdown(minutesNow, secondsNow);
+
+            }
+        }
+        var buzzer = document.getElementById("buzzer");
+        var chime = document.getElementById("chime");
+        var helpMe = document.getElementById("help_button");
+        helpMe.onclick = function () {
+            helpButton();
+        }
+        function helpButton() {
+            alert("This timer follows the pomodoro technique. Traditionally, there are 4 25-minute work sessions, each followed by a 5 min break, although you may customize the work/break sessions with the + and - controls. Every time you complete a work session, a tomato will appear. After 4 tomatoes, you will automatically be given a 30 minute break, after which the timer resets. Of course, you can pause or reset the timer at any time. Happy working!");
+        }
+
+    </script>
+    <footer id="footer">
+        <h6>Pomodoro Timer designed and coded by <a href='https://codepen.io/beowulfskin/full/jmEyjv/' target="_blank"
+                style="color: blue">Terry Reynolds</a>, 2018.<h6>
+
+    </footer>
+
+
+</body>
+
+</html>
